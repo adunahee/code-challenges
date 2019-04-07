@@ -15,7 +15,7 @@ Sample Input 0
 Sample Output 0
 19: 05: 45 */
 
-exports.timeConversion = function(s) {
+exports.timeConversion = function (s) {
     const suffix = s.substring(s.length - 2, s.length);
     let milTimeArr = s.substring(0, s.length - 2).split(":");
     switch (suffix) {
@@ -36,4 +36,49 @@ exports.timeConversion = function(s) {
         default:
             return console.log('Oopsie poopsie');;
     }
+}
+
+/* Complete the countApplesAndOranges function.
+It should print the number of apples and oranges that land on Sam's house, 
+each on a separate line.
+
+countApplesAndOranges has the following parameter(s):
+s: integer, starting point of Sam's house location.
+t: integer, ending location of Sam's house location.
+a: integer, location of the Apple tree.
+b: integer, location of the Orange tree.
+apples: integer array, distances at which each apple falls from the tree.
+oranges: integer array, distances at which each orange falls from the tree.
+
+Constraints
+
+Output Format
+
+Print two integers on two different lines:
+
+The first integer: the number of apples that fall on Sam's house.
+The second integer: the number of oranges that fall on Sam's house.
+Sample Input 0
+
+7 11
+5 15
+3 2
+    - 2 2 1
+5 - 6
+
+Sample Output 0
+1
+1
+
+*/
+
+exports.countApplesAndOranges = (s, t, a, b, apples, oranges) => {
+    const relevantFruits = (fruits, position) => {
+        return fruits.filter(c => {
+            const finalPosition = position + c;
+            return (s <= finalPosition && finalPosition <= t)
+        }).length;
+    }
+    return console.log(
+        `${relevantFruits(apples, a)}\n${relevantFruits(oranges, b)}`)
 }
