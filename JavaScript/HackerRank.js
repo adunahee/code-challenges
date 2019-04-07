@@ -15,7 +15,7 @@ Sample Input 0
 Sample Output 0
 19: 05: 45 */
 
-function timeConversion(s) {
+exports.timeConversion = function(s) {
     const suffix = s.substring(s.length - 2, s.length);
     let milTimeArr = s.substring(0, s.length - 2).split(":");
     switch (suffix) {
@@ -37,5 +37,3 @@ function timeConversion(s) {
             return console.log('Oopsie poopsie');;
     }
 }
-
-console.log(timeConversion("07:05:45PM"));

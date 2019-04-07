@@ -1,0 +1,24 @@
+{
+  "name": "codechallenges",
+  "version": "1.0.0",
+  "description": "For practicing problem solving and testing with different languages",
+  "main": "index.js",
+  "dependencies": {
+    "jest": "^24.7.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adunahee/code-challenges.git"
+  },
+  "author": "Anthony Dunahee <adunahee@gmail.com> (https://github.com/adunahee)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adunahee/code-challenges/issues"
+  },
+  "homepage": "https://github.com/adunahee/code-challenges#readme"
+}
