@@ -82,3 +82,31 @@ exports.countApplesAndOranges = (s, t, a, b, apples, oranges) => {
     return console.log(
         `${relevantFruits(apples, a)}\n${relevantFruits(oranges, b)}`)
 }
+
+/* Function Description
+
+Complete the function kangaroo in the editor below. It should return YES if they reach the same position at the same time, or NO if they don't.
+
+kangaroo has the following parameter(s):
+
+x1, v1: integers, starting position and jump distance for kangaroo 1
+x2, v2: integers, starting position and jump distance for kangaroo 2
+
+*/
+
+exports.kangaroo = (x1, v1, x2, v2) => {
+    if(v1 < v2){
+        return 'NO';
+    }
+    const distanceBetween = x2 - x1;
+    const jumpDifference = Math.abs(v1 - v2);
+    let overlap = distanceBetween%jumpDifference === 0;
+    switch(overlap) {
+        case(true):
+            return 'YES';
+        case(false):
+            return 'NO';
+        default:
+            return null;
+    }
+}
