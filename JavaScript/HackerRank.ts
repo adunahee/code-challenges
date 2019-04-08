@@ -14,15 +14,15 @@ Sample Input 0
 07: 05: 45PM
 Sample Output 0
 19: 05: 45 */
-exports.timeConversion = function (s) {
-    var suffix = s.substring(s.length - 2, s.length);
-    var milTimeArr = s.substring(0, s.length - 2).split(":");
+
+exports.timeConversion = function (s: string) {
+    const suffix = s.substring(s.length - 2, s.length);
+    let milTimeArr = s.substring(0, s.length - 2).split(":");
     switch (suffix) {
         case ('PM'):
             if (milTimeArr[0] === "12") {
                 return (milTimeArr.join(':'));
-            }
-            else {
+            } else {
                 milTimeArr[0] = ((Number(milTimeArr[0]) + 12).toString());
                 return milTimeArr.join(':');
             }
@@ -30,17 +30,16 @@ exports.timeConversion = function (s) {
             if (milTimeArr[0] === "12") {
                 milTimeArr[0] = '00';
                 return milTimeArr.join(':');
-            }
-            else {
+            } else {
                 return milTimeArr.join(':');
             }
         default:
-            return console.log('Oopsie poopsie');
-            ;
+            return console.log('Oopsie poopsie');;
     }
-};
+}
+
 /* Complete the countApplesAndOranges function.
-It should print the number of apples and oranges that land on Sam's house,
+It should print the number of apples and oranges that land on Sam's house, 
 each on a separate line.
 
 countApplesAndOranges has the following parameter(s):
@@ -72,15 +71,18 @@ Sample Output 0
 1
 
 */
-exports.countApplesAndOranges = function (s, t, a, b, apples, oranges) {
-    var relevantFruits = function (fruits, position) {
-        return fruits.filter(function (c) {
-            var finalPosition = position + c;
-            return (s <= finalPosition && finalPosition <= t);
+
+exports.countApplesAndOranges = (s, t, a, b, apples, oranges) => {
+    const relevantFruits = (fruits, position) => {
+        return fruits.filter(c => {
+            const finalPosition = position + c;
+            return (s <= finalPosition && finalPosition <= t)
         }).length;
-    };
-    return console.log(relevantFruits(apples, a) + "\n" + relevantFruits(oranges, b));
-};
+    }
+    return console.log(
+        `${relevantFruits(apples, a)}\n${relevantFruits(oranges, b)}`)
+}
+
 /* Function Description
 
 Complete the function kangaroo in the editor below. It should return YES if they reach the same position at the same time, or NO if they don't.
@@ -91,19 +93,20 @@ x1, v1: integers, starting position and jump distance for kangaroo 1
 x2, v2: integers, starting position and jump distance for kangaroo 2
 
 */
-exports.kangaroo = function (x1, v1, x2, v2) {
-    if (v1 < v2) {
+
+exports.kangaroo = (x1, v1, x2, v2) => {
+    if(v1 < v2){
         return 'NO';
     }
-    var distanceBetween = x2 - x1;
-    var jumpDifference = Math.abs(v1 - v2);
-    var overlap = distanceBetween % jumpDifference === 0;
-    switch (overlap) {
-        case (true):
+    const distanceBetween = x2 - x1;
+    const jumpDifference = Math.abs(v1 - v2);
+    let overlap = distanceBetween%jumpDifference === 0;
+    switch(overlap) {
+        case(true):
             return 'YES';
-        case (false):
+        case(false):
             return 'NO';
         default:
             return null;
     }
-};
+}

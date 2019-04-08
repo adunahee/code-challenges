@@ -9,7 +9,8 @@
   "devDependencies": {},
   "scripts": {
     "start": "node index.js",
-    "test": "jest"
+    "test": "jest",
+    "compTS": "tsc ./JavaScript/HackerRank.ts"
   },
   "repository": {
     "type": "git",
