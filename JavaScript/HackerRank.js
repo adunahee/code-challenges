@@ -121,19 +121,19 @@ exports.getTotalX = function (a, b) {
     //range array contains possible valid integers
     var possibleRange = Array.from({ length: max - min + 1 }, function (x, i) { return min + i; });
     // function for pairing down valid ints in range
-    var intCheck = function (numbers, currentRange, criteria) {
+    var intCheck = function (numbers, incRange, criteria) {
         var prunedRange;
         var testRange;
-        numbers.forEach(function (n) {
+        numbers.forEach(function (n, i) {
             // logic to use incoming range for first pass, then pruned range thereafter
-            if (numbers.indexOf(n) === 0) {
-                testRange = currentRange;
+            if (i === 0) {
+                testRange = incRange;
             }
             else {
                 testRange = prunedRange;
             }
             prunedRange = testRange.filter(function (r) {
-                if (criteria = 1) {
+                if (criteria === 1) {
                     return r % n === 0;
                 }
                 else if (criteria === 2) {

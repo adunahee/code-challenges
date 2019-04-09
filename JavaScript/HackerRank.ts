@@ -126,18 +126,18 @@ exports.getTotalX = (a: [number], b: [number]) => {
     //range array contains possible valid integers
     const possibleRange: Array<number> = Array.from({ length: max - min + 1 }, (x, i) => min + i);
     // function for pairing down valid ints in range
-    const intCheck = (numbers: Array<number>, currentRange: Array<number>, criteria: number) => {
+    const intCheck = (numbers: Array<number>, incRange: Array<number>, criteria: number) => {
         let prunedRange: Array<number>;
         let testRange: Array<number>;
-        numbers.forEach((n) => {
+        numbers.forEach((n, i) => {
             // logic to use incoming range for first pass, then pruned range thereafter
-            if (numbers.indexOf(n) === 0) {
-                testRange = currentRange;
+            if (i === 0) {
+                testRange = incRange;
             } else {
                 testRange = prunedRange;
             }
             prunedRange = testRange.filter((r) => {
-                if (criteria = 1) {
+                if (criteria === 1) {
                     return r % n === 0;
                 } else if(criteria === 2){
                     return n % r === 0;
