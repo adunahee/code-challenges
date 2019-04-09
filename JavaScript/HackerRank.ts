@@ -95,18 +95,50 @@ x2, v2: integers, starting position and jump distance for kangaroo 2
 */
 
 exports.kangaroo = (x1, v1, x2, v2) => {
-    if(v1 < v2){
+    if (v1 < v2) {
         return 'NO';
     }
     const distanceBetween = x2 - x1;
     const jumpDifference = Math.abs(v1 - v2);
-    let overlap = distanceBetween%jumpDifference === 0;
-    switch(overlap) {
-        case(true):
+    let overlap = distanceBetween % jumpDifference === 0;
+    switch (overlap) {
+        case (true):
             return 'YES';
-        case(false):
+        case (false):
             return 'NO';
         default:
             return null;
     }
 }
+
+/* You will be given two arrays of integers and asked to determine all integers that satisfy the following two conditions:
+
+The elements of the first array are all factors of the integer being considered
+The integer being considered is a factor of all elements of the second array
+These numbers are referred to as being between the two arrays. You must determine how many such numbers exist.
+
+*/
+
+exports.getTotalX = (a: [number], b: [number]) => {
+    // min and max values for range
+    const min: number = a[a.length - 1];
+    const max: number = b[0];
+    //range array contains possible valid integers
+    const range: Array<number> = Array.from({ length: max - min + 1 }, (x, i) => min + i);
+    // const intCheck = () => { };
+    a.forEach((aInt) => {
+        range.forEach((rangeInt, i) => {
+            if (rangeInt % aInt > 0) {
+                range.splice(i, 1);
+            };
+        });
+    });
+    b.forEach((bInt) => {
+        range.forEach((rangeInt, i) => {
+            if (bInt % rangeInt > 0) {
+                range.splice(i, 1);
+            };
+        });
+    });
+    return range.length;
+};

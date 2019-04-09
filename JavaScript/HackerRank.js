@@ -107,3 +107,35 @@ exports.kangaroo = function (x1, v1, x2, v2) {
             return null;
     }
 };
+/* You will be given two arrays of integers and asked to determine all integers that satisfy the following two conditions:
+
+The elements of the first array are all factors of the integer being considered
+The integer being considered is a factor of all elements of the second array
+These numbers are referred to as being between the two arrays. You must determine how many such numbers exist.
+
+*/
+exports.getTotalX = function (a, b) {
+    // min and max values for range
+    var min = a[a.length - 1];
+    var max = b[0];
+    //range array contains possible valid integers
+    var range = Array.from({ length: max - min + 1 }, function (x, i) { return min + i; });
+    // const intCheck = () => { };
+    a.forEach(function (aInt) {
+        range.forEach(function (rangeInt, i) {
+            if (rangeInt % aInt > 0) {
+                range.splice(i, 1);
+            }
+            ;
+        });
+    });
+    b.forEach(function (bInt) {
+        range.forEach(function (rangeInt, i) {
+            if (bInt % rangeInt > 0) {
+                range.splice(i, 1);
+            }
+            ;
+        });
+    });
+    return range.length;
+};
