@@ -124,21 +124,32 @@ exports.getTotalX = (a: [number], b: [number]) => {
     const min: number = a[a.length - 1];
     const max: number = b[0];
     //range array contains possible valid integers
-    const range: Array<number> = Array.from({ length: max - min + 1 }, (x, i) => min + i);
-    // const intCheck = () => { };
-    a.forEach((aInt) => {
-        range.forEach((rangeInt, i) => {
-            if (rangeInt % aInt > 0) {
-                range.splice(i, 1);
-            };
+    const possibleRange: Array<number> = Array.from({ length: max - min + 1 }, (x, i) => min + i);
+    // function for pairing down valid ints in range
+    const intCheck = (numbers: Array<number>, currentRange: Array<number>, criteria: number) => {
+        let prunedRange: Array<number>;
+        let testRange: Array<number>;
+        numbers.forEach((n) => {
+            // logic to use incoming range for first pass, then pruned range thereafter
+            if (numbers.indexOf(n) === 0) {
+                testRange = currentRange;
+            } else {
+                testRange = prunedRange;
+            }
+            prunedRange = testRange.filter((r) => {
+                if (criteria = 1) {
+                    return r % n === 0;
+                } else if(criteria === 2){
+                    return n % r === 0;
+                }
+            });
         });
-    });
-    b.forEach((bInt) => {
-        range.forEach((rangeInt, i) => {
-            if (bInt % rangeInt > 0) {
-                range.splice(i, 1);
-            };
-        });
-    });
-    return range.length;
+        // after all pruning on nonvalid ints
+        return prunedRange;
+    };
+    // the elements of the first array are all factors of valid integer in range
+    const aCheckRange: Array<number> = intCheck(a, possibleRange, 1);
+    // valid integers in range must be factors of all elements of the second array
+    const finalRange: Array<number> = intCheck(aCheckRange, b, 2);
+    return finalRange.length;
 };

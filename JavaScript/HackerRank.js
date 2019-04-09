@@ -119,23 +119,34 @@ exports.getTotalX = function (a, b) {
     var min = a[a.length - 1];
     var max = b[0];
     //range array contains possible valid integers
-    var range = Array.from({ length: max - min + 1 }, function (x, i) { return min + i; });
-    // const intCheck = () => { };
-    a.forEach(function (aInt) {
-        range.forEach(function (rangeInt, i) {
-            if (rangeInt % aInt > 0) {
-                range.splice(i, 1);
+    var possibleRange = Array.from({ length: max - min + 1 }, function (x, i) { return min + i; });
+    // function for pairing down valid ints in range
+    var intCheck = function (numbers, currentRange, criteria) {
+        var prunedRange;
+        var testRange;
+        numbers.forEach(function (n) {
+            // logic to use incoming range for first pass, then pruned range thereafter
+            if (numbers.indexOf(n) === 0) {
+                testRange = currentRange;
             }
-            ;
-        });
-    });
-    b.forEach(function (bInt) {
-        range.forEach(function (rangeInt, i) {
-            if (bInt % rangeInt > 0) {
-                range.splice(i, 1);
+            else {
+                testRange = prunedRange;
             }
-            ;
+            prunedRange = testRange.filter(function (r) {
+                if (criteria = 1) {
+                    return r % n === 0;
+                }
+                else if (criteria === 2) {
+                    return n % r === 0;
+                }
+            });
         });
-    });
-    return range.length;
+        // after all pruning on nonvalid ints
+        return prunedRange;
+    };
+    // the elements of the first array are all factors of valid integer in range
+    var aCheckRange = intCheck(a, possibleRange, 1);
+    // valid integers in range must be factors of all elements of the second array
+    var finalRange = intCheck(aCheckRange, b, 2);
+    return finalRange.length;
 };
