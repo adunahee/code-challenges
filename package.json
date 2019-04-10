@@ -4,7 +4,8 @@
   "description": "For practicing problem solving and testing with different languages",
   "main": "index.js",
   "dependencies": {
-    "jest": "^24.7.1"
+    "jest": "^24.7.1",
+    "prettify": "^0.1.7"
   },
   "devDependencies": {},
   "scripts": {
