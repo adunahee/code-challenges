@@ -147,6 +147,6 @@ exports.getTotalX = function (a, b) {
     // the elements of the first array are all factors of valid integer in range
     var aCheckRange = intCheck(a, possibleRange, 1);
     // valid integers in range must be factors of all elements of the second array
-    var finalRange = intCheck(aCheckRange, b, 2);
+    var finalRange = intCheck(b, aCheckRange, 2);
     return finalRange.length;
 };

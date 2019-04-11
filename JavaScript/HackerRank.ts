@@ -150,6 +150,6 @@ exports.getTotalX = (a: [number], b: [number]) => {
     // the elements of the first array are all factors of valid integer in range
     const aCheckRange: Array<number> = intCheck(a, possibleRange, 1);
     // valid integers in range must be factors of all elements of the second array
-    const finalRange: Array<number> = intCheck(aCheckRange, b, 2);
+    const finalRange: Array<number> = intCheck(b, aCheckRange, 2);
     return finalRange.length;
 };

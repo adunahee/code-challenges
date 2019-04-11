@@ -1,6 +1,6 @@
 const { timeConversion,
     countApplesAndOranges,
-    kangaroo } = require('../JavaScript/HackerRank');
+    kangaroo, getTotalX } = require('../JavaScript/HackerRank');
 
 describe('test suite for timeConversion', () => {
     it('when receiving a time stamp string it returns a string with length 8 representing time',
@@ -45,3 +45,15 @@ describe('test suite for kangaroo', () => {
         expect(kangaroo(4, 3, 5, 2)).toBe('YES');
     });
 });
+
+describe('test suite for getTotalX', () => {
+    it('returns an integer value', () => {
+        expect(typeof getTotalX([2, 3],[6, 12])).toBe('number');
+    });
+    it('returns a number equal to the integers which satisfy criteria one and two', () => {
+        expect(getTotalX([2,3],[6,12])).toBe(1);
+        expect(getTotalX([2,4,6], [12,24,48])).toBe(1);
+        expect(getTotalX([3,9],[18,24])).toBe(0);
+        expect(getTotalX([2, 4], [16,32,96])).toBe(3);
+    })
+})
