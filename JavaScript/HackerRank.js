@@ -1,3 +1,4 @@
+"use strict";
 /* Given a time in -hour AM / PM format, convert it to military(24 - hour) time.
     Note: Midnight is 12: 00: 00AM on a 12 - hour clock, and 00: 00: 00 on a 24 - hour clock.Noon is 12: 00: 00PM on a 12 - hour clock, and 12: 00: 00 on a 24 - hour clock.
 Function Description
@@ -14,7 +15,8 @@ Sample Input 0
 07: 05: 45PM
 Sample Output 0
 19: 05: 45 */
-exports.timeConversion = function (s) {
+exports.__esModule = true;
+function timeConversion(s) {
     var suffix = s.substring(s.length - 2, s.length);
     var milTimeArr = s.substring(0, s.length - 2).split(":");
     switch (suffix) {
@@ -38,7 +40,8 @@ exports.timeConversion = function (s) {
             return console.log('Oopsie poopsie');
             ;
     }
-};
+}
+exports.timeConversion = timeConversion;
 /* Complete the countApplesAndOranges function.
 It should print the number of apples and oranges that land on Sam's house,
 each on a separate line.
@@ -72,7 +75,7 @@ Sample Output 0
 1
 
 */
-exports.countApplesAndOranges = function (s, t, a, b, apples, oranges) {
+function countApplesAndOranges(s, t, a, b, apples, oranges) {
     var relevantFruits = function (fruits, position) {
         return fruits.filter(function (c) {
             var finalPosition = position + c;
@@ -80,7 +83,8 @@ exports.countApplesAndOranges = function (s, t, a, b, apples, oranges) {
         }).length;
     };
     return console.log(relevantFruits(apples, a) + "\n" + relevantFruits(oranges, b));
-};
+}
+exports.countApplesAndOranges = countApplesAndOranges;
 /* Function Description
 
 Complete the function kangaroo in the editor below. It should return YES if they reach the same position at the same time, or NO if they don't.
@@ -91,7 +95,7 @@ x1, v1: integers, starting position and jump distance for kangaroo 1
 x2, v2: integers, starting position and jump distance for kangaroo 2
 
 */
-exports.kangaroo = function (x1, v1, x2, v2) {
+function kangaroo(x1, v1, x2, v2) {
     if (v1 < v2) {
         return 'NO';
     }
@@ -106,7 +110,8 @@ exports.kangaroo = function (x1, v1, x2, v2) {
         default:
             return null;
     }
-};
+}
+exports.kangaroo = kangaroo;
 /* You will be given two arrays of integers and asked to determine all integers that satisfy the following two conditions:
 
 The elements of the first array are all factors of the integer being considered
@@ -114,7 +119,7 @@ The integer being considered is a factor of all elements of the second array
 These numbers are referred to as being between the two arrays. You must determine how many such numbers exist.
 
 */
-exports.getTotalX = function (a, b) {
+function getTotalX(a, b) {
     // min and max values for range
     var min = a[a.length - 1];
     var max = b[0];
@@ -149,4 +154,45 @@ exports.getTotalX = function (a, b) {
     // valid integers in range must be factors of all elements of the second array
     var finalRange = intCheck(b, aCheckRange, 2);
     return finalRange.length;
-};
+}
+exports.getTotalX = getTotalX;
+;
+/* Problem: Maria plays college basketball and wants to go pro. Each season she
+maintains a record of her play. She tabulates the number of times she breaks her
+ season record for most points and least points in a game. Points scored in the
+ first game establish her record for the season, and she begins counting from there.
+
+For example, assume her scores for the season are represented in the array .
+Scores are in the same order as the games played. She would tabulate her results
+as follows:
+
+Complete the breakingRecords function in the editor below. It must return an
+integer array containing the numbers of times she broke her records. Index
+is for breaking most points records, and index  is for breaking least points
+records.
+
+breakingRecords has the following parameter(s):
+
+scores: an array of integers*/
+function breakingRecords(scores) {
+    //based on first game performance
+    var records = [scores[0], scores[0]];
+    //none for min or max at beginning of season
+    var recordChanges = [0, 0];
+    //checks each score to see if it breaks a record
+    scores.forEach(function (c) {
+        if (c < records[0]) {
+            records.shift();
+            records.unshift(c);
+            return recordChanges[0]++;
+        }
+        else if (c > records[1]) {
+            records.pop();
+            records.push(c);
+            return recordChanges[1]++;
+        }
+    });
+    return recordChanges;
+}
+exports.breakingRecords = breakingRecords;
+;

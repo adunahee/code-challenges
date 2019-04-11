@@ -15,7 +15,7 @@ Sample Input 0
 Sample Output 0
 19: 05: 45 */
 
-exports.timeConversion = function (s: string) {
+export function timeConversion(s: string) {
     const suffix = s.substring(s.length - 2, s.length);
     let milTimeArr = s.substring(0, s.length - 2).split(":");
     switch (suffix) {
@@ -72,7 +72,7 @@ Sample Output 0
 
 */
 
-exports.countApplesAndOranges = (s, t, a, b, apples, oranges) => {
+export function countApplesAndOranges(s, t, a, b, apples, oranges) {
     const relevantFruits = (fruits, position) => {
         return fruits.filter(c => {
             const finalPosition = position + c;
@@ -94,7 +94,7 @@ x2, v2: integers, starting position and jump distance for kangaroo 2
 
 */
 
-exports.kangaroo = (x1, v1, x2, v2) => {
+export function kangaroo(x1, v1, x2, v2) {
     if (v1 < v2) {
         return 'NO';
     }
@@ -119,7 +119,7 @@ These numbers are referred to as being between the two arrays. You must determin
 
 */
 
-exports.getTotalX = (a: [number], b: [number]) => {
+export function getTotalX(a: [number], b: [number]) {
     // min and max values for range
     const min: number = a[a.length - 1];
     const max: number = b[0];
@@ -139,7 +139,7 @@ exports.getTotalX = (a: [number], b: [number]) => {
             prunedRange = testRange.filter((r) => {
                 if (criteria === 1) {
                     return r % n === 0;
-                } else if(criteria === 2){
+                } else if (criteria === 2) {
                     return n % r === 0;
                 }
             });
@@ -152,4 +152,43 @@ exports.getTotalX = (a: [number], b: [number]) => {
     // valid integers in range must be factors of all elements of the second array
     const finalRange: Array<number> = intCheck(b, aCheckRange, 2);
     return finalRange.length;
+};
+
+/* Problem: Maria plays college basketball and wants to go pro. Each season she 
+maintains a record of her play. She tabulates the number of times she breaks her
+ season record for most points and least points in a game. Points scored in the 
+ first game establish her record for the season, and she begins counting from there.
+
+For example, assume her scores for the season are represented in the array . 
+Scores are in the same order as the games played. She would tabulate her results 
+as follows:
+
+Complete the breakingRecords function in the editor below. It must return an 
+integer array containing the numbers of times she broke her records. Index  
+is for breaking most points records, and index  is for breaking least points 
+records.
+
+breakingRecords has the following parameter(s):
+
+scores: an array of integers*/
+
+export function breakingRecords(scores: Array<number>) {
+    //based on first game performance
+    const records: Array<number> = [scores[0], scores[0]];
+    //none for min or max at beginning of season
+    const recordChanges: Array<number> = [0, 0];
+    //checks each score to see if it breaks a record
+    scores.forEach((c) => {
+        // checking to see if game score is a new max or new min
+        if (c > records[0]) {
+            records.shift();
+            records.unshift(c);
+            return recordChanges[0]++;
+        } else if (c < records[1]) {
+            records.pop();
+            records.push(c);
+            return recordChanges[1]++;
+        }
+    });
+    return recordChanges;
 };
