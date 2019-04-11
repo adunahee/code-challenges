@@ -220,3 +220,37 @@ export function birthday(s: Array<number>, d: number, m: number) {
     }
     return divisions;
 }
+
+//same function as a class for practice
+export class birthdayBarCutter {
+    s: Array<number>;
+    d: number;
+    m: number;
+    validSegments: number = this.getValidSegments();
+    constructor(s: Array<number>, d: number, m: number) {
+        this.s = s;
+        this.d = d;
+        this.m = m;
+    }
+    getValidSegments(): number {
+        const { s, getSegmentSum } = this;
+        let validSegmentsCounter: number = 0;
+        for (let i: number = 0; i < s.length; i++) {
+            const segmentSum: number = getSegmentSum(i);
+            validSegmentsCounter += this.checkSegmentSum(segmentSum);
+        }
+        return validSegmentsCounter;
+    }
+    getSegmentSum(index: number): number {
+        const { s, m } = this;
+        return s.slice(index, index + m)
+            .reduce((acc, c) => acc + c);
+    }
+    checkSegmentSum(sum: number): number {
+        if (sum === this.d) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}

@@ -225,3 +225,36 @@ function birthday(s, d, m) {
     return divisions;
 }
 exports.birthday = birthday;
+//same function as a class for practice
+var birthdayBarCutter = /** @class */ (function () {
+    function birthdayBarCutter(s, d, m) {
+        this.validSegments = this.getValidSegments();
+        this.s = s;
+        this.d = d;
+        this.m = m;
+    }
+    birthdayBarCutter.prototype.getValidSegments = function () {
+        var _a = this, s = _a.s, getSegmentSum = _a.getSegmentSum;
+        var validSegmentsCounter = 0;
+        for (var i = 0; i < s.length; i++) {
+            var segmentSum = getSegmentSum(i);
+            validSegmentsCounter += this.checkSegmentSum(segmentSum);
+        }
+        return validSegmentsCounter;
+    };
+    birthdayBarCutter.prototype.getSegmentSum = function (index) {
+        var _a = this, s = _a.s, m = _a.m;
+        return s.slice(index, index + m)
+            .reduce(function (acc, c) { return acc + c; });
+    };
+    birthdayBarCutter.prototype.checkSegmentSum = function (sum) {
+        if (sum === this.d) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    };
+    return birthdayBarCutter;
+}());
+exports.birthdayBarCutter = birthdayBarCutter;
