@@ -1,6 +1,6 @@
 const { timeConversion,
     countApplesAndOranges,
-    kangaroo, getTotalX } = require('../JavaScript/HackerRank');
+    kangaroo, getTotalX, birthdayBarCutter } = require('../JavaScript/HackerRank');
 
 describe('test suite for timeConversion', () => {
     it('when receiving a time stamp string it returns a string with length 8 representing time',
@@ -48,12 +48,47 @@ describe('test suite for kangaroo', () => {
 
 describe('test suite for getTotalX', () => {
     it('returns an integer value', () => {
-        expect(typeof getTotalX([2, 3],[6, 12])).toBe('number');
+        expect(typeof getTotalX([2, 3], [6, 12])).toBe('number');
     });
     it('returns a number equal to the integers which satisfy criteria one and two', () => {
-        expect(getTotalX([2,3],[6,12])).toBe(1);
-        expect(getTotalX([2,4,6], [12,24,48])).toBe(1);
-        expect(getTotalX([3,9],[18,24])).toBe(0);
-        expect(getTotalX([2, 4], [16,32,96])).toBe(3);
+        expect(getTotalX([2, 3], [6, 12])).toBe(1);
+        expect(getTotalX([2, 4, 6], [12, 24, 48])).toBe(1);
+        expect(getTotalX([3, 9], [18, 24])).toBe(0);
+        expect(getTotalX([2, 4], [16, 32, 96])).toBe(3);
     })
 })
+
+const instance = new birthdayBarCutter([1, 2, 3, 2, 1], 3, 2);
+describe('test suite for birthdayBarCutter', () => {
+    it(`class creates new object with four properties, 3 same as params, and the 
+    last a number reflecting valid segments`,
+        () => {
+            expect(instance.s).toEqual([1, 2, 3, 2, 1]);
+            expect(instance.d).toBe(3);
+            expect(instance.m).toBe(2);
+            expect(instance.validSegments).toBe(2);
+        })
+    it('class properties are expected data types',
+        () => {
+            expect(typeof instance).toBe('object');
+            expect(Array.isArray(instance.s)).toBe(true);
+            expect(typeof instance.d).toBe('number');
+            expect(typeof instance.m).toBe('number');
+        });
+    it('has a method that compares two values, if equal returns 1 otherwise returns 0', () => {
+        expect(instance.checkSegmentSum(2, 0)).toBe(0);
+        expect(instance.checkSegmentSum(0, 0)).toBe(1);
+        expect(instance.checkSegmentSum(-1, 1)).toBe(0);
+    });
+    it('has a method for slicing up an array and summing that range of values', () => {
+        expect(instance.getSegmentSum(0, [1, 2, 3], 3)).toBe(6);
+        let arr = [1, 2, 1, 2, 1];
+        for (let i = 0; i < arr.length; i++) {
+            if (i === arr.length - 1) {
+                expect(instance.getSegmentSum(i, arr, 2)).toBe(1);
+            } else {
+                expect(instance.getSegmentSum(i, arr, 2)).toBe(3);
+            }
+        };
+    });
+});

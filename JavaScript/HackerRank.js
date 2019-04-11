@@ -228,27 +228,27 @@ exports.birthday = birthday;
 //same function as a class for practice
 var birthdayBarCutter = /** @class */ (function () {
     function birthdayBarCutter(s, d, m) {
-        this.validSegments = this.getValidSegments();
+        this.validSegments = 0;
         this.s = s;
         this.d = d;
         this.m = m;
+        this.validSegments = this.getValidSegments();
     }
     birthdayBarCutter.prototype.getValidSegments = function () {
-        var _a = this, s = _a.s, getSegmentSum = _a.getSegmentSum;
+        var _a = this, s = _a.s, getSegmentSum = _a.getSegmentSum, m = _a.m, checkSegmentSum = _a.checkSegmentSum, d = _a.d;
         var validSegmentsCounter = 0;
         for (var i = 0; i < s.length; i++) {
-            var segmentSum = getSegmentSum(i);
-            validSegmentsCounter += this.checkSegmentSum(segmentSum);
+            var segmentSum = getSegmentSum(i, s, m);
+            validSegmentsCounter += checkSegmentSum(segmentSum, d);
         }
         return validSegmentsCounter;
     };
-    birthdayBarCutter.prototype.getSegmentSum = function (index) {
-        var _a = this, s = _a.s, m = _a.m;
-        return s.slice(index, index + m)
+    birthdayBarCutter.prototype.getSegmentSum = function (index, arr, month) {
+        return arr.slice(index, index + month)
             .reduce(function (acc, c) { return acc + c; });
     };
-    birthdayBarCutter.prototype.checkSegmentSum = function (sum) {
-        if (sum === this.d) {
+    birthdayBarCutter.prototype.checkSegmentSum = function (sum, day) {
+        if (sum === day) {
             return 1;
         }
         else {

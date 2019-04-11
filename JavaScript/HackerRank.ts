@@ -226,28 +226,28 @@ export class birthdayBarCutter {
     s: Array<number>;
     d: number;
     m: number;
-    validSegments: number = this.getValidSegments();
+    validSegments: number = 0;
     constructor(s: Array<number>, d: number, m: number) {
         this.s = s;
         this.d = d;
         this.m = m;
+        this.validSegments = this.getValidSegments();
     }
     getValidSegments(): number {
-        const { s, getSegmentSum } = this;
+        const { s, getSegmentSum, m, checkSegmentSum, d } = this;
         let validSegmentsCounter: number = 0;
         for (let i: number = 0; i < s.length; i++) {
-            const segmentSum: number = getSegmentSum(i);
-            validSegmentsCounter += this.checkSegmentSum(segmentSum);
+            const segmentSum: number = getSegmentSum(i, s, m);
+            validSegmentsCounter += checkSegmentSum(segmentSum, d);
         }
         return validSegmentsCounter;
     }
-    getSegmentSum(index: number): number {
-        const { s, m } = this;
-        return s.slice(index, index + m)
+    getSegmentSum(index: number, arr: Array<number>, month: number): number {
+        return arr.slice(index, index + month)
             .reduce((acc, c) => acc + c);
     }
-    checkSegmentSum(sum: number): number {
-        if (sum === this.d) {
+    checkSegmentSum(sum: number, day: number): number {
+        if (sum === day) {
             return 1;
         } else {
             return 0;
