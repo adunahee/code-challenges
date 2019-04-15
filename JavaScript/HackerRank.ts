@@ -254,3 +254,26 @@ export class birthdayBarCutter {
         }
     }
 }
+
+/* Complete the divisibleSumPairs function in the editor below. It should return
+ the integer count of pairs meeting the criteria.
+
+criteria: pair (i, j) must meet i < j and ar[i] + ar[j] is divisble by k
+
+divisibleSumPairs has the following parameter(s):
+n: the integer length of array
+ar: an array of integers
+k: the integer to divide the pair sum by
+ */
+
+export function divisibleSumPairs(n: number, k: number, ar: Array<number>): number {
+    const sortedAr: Array<number> = ar.sort();
+    let totalValidSumPairs: number = 0;
+    for(let i: number = 0; i < n; i++){
+        let counter: number = 0; 
+        if((sortedAr[i] + sortedAr[n]) / k === 0) {
+            totalValidSumPairs++;
+        } 
+    }
+    return totalValidSumPairs;
+}
