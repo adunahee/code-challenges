@@ -124,7 +124,10 @@ export function getTotalX(a: [number], b: [number]) {
     const min: number = a[a.length - 1];
     const max: number = b[0];
     //range array contains possible valid integers
-    const possibleRange: Array<number> = Array.from({ length: max - min + 1 }, (x, i) => min + i);
+    const possibleRange: Array<number> = Array((max-min+1));
+    for(let i: number = min; i < possibleRange.length; i++){
+        possibleRange.push(i);    
+    }
     // function for pairing down valid ints in range
     const intCheck = (numbers: Array<number>, incRange: Array<number>, criteria: number) => {
         let prunedRange: Array<number>;
@@ -269,11 +272,14 @@ k: the integer to divide the pair sum by
 export function divisibleSumPairs(n: number, k: number, ar: Array<number>): number {
     const sortedAr: Array<number> = ar.sort();
     let totalValidSumPairs: number = 0;
-    for(let i: number = 0; i < n; i++){
-        let counter: number = 0; 
-        if((sortedAr[i] + sortedAr[n]) / k === 0) {
-            totalValidSumPairs++;
-        } 
+    for (let i: number = 0; i < n; i++) {
+        let iterator: number = i;
+        while (iterator < n) {
+            if ((sortedAr[i] + sortedAr[iterator]) % k === 0) {
+                totalValidSumPairs++;
+            }
+            iterator++;
+        }
     }
     return totalValidSumPairs;
 }

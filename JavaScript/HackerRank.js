@@ -124,7 +124,10 @@ function getTotalX(a, b) {
     var min = a[a.length - 1];
     var max = b[0];
     //range array contains possible valid integers
-    var possibleRange = Array.from({ length: max - min + 1 }, function (x, i) { return min + i; });
+    var possibleRange = Array((max - min + 1));
+    for (var i = min; i < possibleRange.length; i++) {
+        possibleRange.push(i);
+    }
     // function for pairing down valid ints in range
     var intCheck = function (numbers, incRange, criteria) {
         var prunedRange;
@@ -258,3 +261,28 @@ var birthdayBarCutter = /** @class */ (function () {
     return birthdayBarCutter;
 }());
 exports.birthdayBarCutter = birthdayBarCutter;
+/* Complete the divisibleSumPairs function in the editor below. It should return
+ the integer count of pairs meeting the criteria.
+
+criteria: pair (i, j) must meet i < j and ar[i] + ar[j] is divisble by k
+
+divisibleSumPairs has the following parameter(s):
+n: the integer length of array
+ar: an array of integers
+k: the integer to divide the pair sum by
+ */
+function divisibleSumPairs(n, k, ar) {
+    var sortedAr = ar.sort();
+    var totalValidSumPairs = 0;
+    for (var i = 0; i < n; i++) {
+        var iterator = i;
+        while (iterator < n) {
+            if ((sortedAr[i] + sortedAr[iterator]) % k === 0) {
+                totalValidSumPairs++;
+            }
+            iterator++;
+        }
+    }
+    return totalValidSumPairs;
+}
+exports.divisibleSumPairs = divisibleSumPairs;
